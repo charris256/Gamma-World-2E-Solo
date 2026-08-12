@@ -1,0 +1,17 @@
+{
+  "name": "Gamma Solo",
+  "short_name": "Gamma Solo",
+  "description": "A local-first solo campaign companion for strange worlds and mutant ruins.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#090d0c",
+  "theme_color": "#b7d54a",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

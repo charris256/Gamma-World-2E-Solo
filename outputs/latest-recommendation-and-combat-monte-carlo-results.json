@@ -1,0 +1,957 @@
+{
+  "runAt": "2026-07-06T15:42:19.755Z",
+  "cases": 100,
+  "passed": 100,
+  "failed": 0,
+  "coveragePassed": 11,
+  "coverageFailed": 0,
+  "markerChecks": [
+    {
+      "name": "analytics dimensions",
+      "pass": true
+    },
+    {
+      "name": "analytics export reset",
+      "pass": true
+    },
+    {
+      "name": "diversity warnings",
+      "pass": true
+    },
+    {
+      "name": "tone thresholds",
+      "pass": true
+    },
+    {
+      "name": "full friendly cards",
+      "pass": true
+    },
+    {
+      "name": "force breakdown",
+      "pass": true
+    },
+    {
+      "name": "multi-candidate preset repair",
+      "pass": true
+    },
+    {
+      "name": "preset folders",
+      "pass": true
+    },
+    {
+      "name": "baseline reconciliation",
+      "pass": true
+    },
+    {
+      "name": "recent combat links",
+      "pass": true
+    },
+    {
+      "name": "injury filter",
+      "pass": true
+    }
+  ],
+  "finding": "Feature scenarios completed without procedural dead ends. Production build passes. Browser smoke budget check remains open: optimized JavaScript is 426.94 KB versus the 400 KB target.",
+  "checks": [
+    {
+      "case": 1,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 1,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 2,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 1.33,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 3,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1.25,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 4,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 0.67,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 5,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 1.38,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 6,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 2,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 7,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 2.33,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 8,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 1.56,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 9,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.27,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 10,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 2,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 11,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 2.83,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 12,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.5,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 13,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 6.5,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 14,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 0.25,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 15,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.64,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 16,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 5.33,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 17,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 1,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 18,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1.09,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 19,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 0.2,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 20,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 0.73,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 21,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1.88,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 22,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 2,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 23,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 1.38,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 24,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1.29,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 25,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 1.75,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 26,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 2.8,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 27,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.27,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 28,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 2,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 29,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 2.43,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 30,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.46,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 31,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 6.5,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 32,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 0.25,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 33,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.9,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 34,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 4,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 35,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 0.5,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 36,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1.09,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 37,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 1,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 38,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 1.14,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 39,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1.15,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 40,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 0.57,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 41,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 2.75,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 42,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1.8,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 43,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 1.75,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 44,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 1.4,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 45,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.25,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 46,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 10,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 47,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 2.43,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 48,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.46,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 49,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 4.33,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 50,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 0.22,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 51,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.9,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 52,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 4,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 53,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 0.83,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 54,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 55,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 0.17,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 56,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 1.14,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 57,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1.67,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 58,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 1.33,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 59,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 1.22,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 60,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1.2,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 61,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 7,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 62,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 2.33,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 63,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.25,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 64,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 1.67,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 65,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 2.13,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 66,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.67,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 67,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 4.33,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 68,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 0.22,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 69,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.82,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 70,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 3.2,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 71,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 0.83,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 72,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 73,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 0.5,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 74,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 1,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 75,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1.07,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 76,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 1.33,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 77,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 2.2,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 78,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1.64,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 79,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 1.4,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 80,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 1.27,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 81,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.38,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 82,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 5,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 83,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 2.13,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 84,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.43,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 85,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 3.25,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 86,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 0.4,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 87,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.82,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 88,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 3.2,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 89,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 0.71,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 90,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.92,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 91,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 0.5,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 92,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 1,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 93,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1.5,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 94,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 1,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 95,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 1.1,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 96,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 1.64,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 97,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 7,
+      "folder": "Melee",
+      "health": "Empty Ammunition",
+      "pass": true
+    },
+    {
+      "case": 98,
+      "tone": "Standard",
+      "threshold": 2,
+      "ratio": 2,
+      "folder": "Ranged",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 99,
+      "tone": "Cinematic",
+      "threshold": 2.5,
+      "ratio": 0.23,
+      "folder": "Mutation-assisted",
+      "health": "Ready",
+      "pass": true
+    },
+    {
+      "case": 100,
+      "tone": "Gritty",
+      "threshold": 1.5,
+      "ratio": 1.43,
+      "folder": "Emergency",
+      "health": "Ready",
+      "pass": true
+    }
+  ]
+}

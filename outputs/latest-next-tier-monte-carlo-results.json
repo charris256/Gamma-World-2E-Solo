@@ -1,0 +1,86 @@
+{
+  "sessions": 100,
+  "completed": 100,
+  "deadEnds": 0,
+  "physicalLookups": 821,
+  "physicalMissing": 0,
+  "attacks": 821,
+  "hits": 319,
+  "damage": 1525,
+  "ammoSpent": 375,
+  "ammoWarnings": 5,
+  "ammoBlocks": 0,
+  "familyMatches": 67,
+  "repeatAttacks": 36,
+  "forecastErrors": 0,
+  "mental": {
+    "Lightweight": {
+      "attempts": 26,
+      "success": 11
+    },
+    "Matrix": {
+      "attempts": 28,
+      "success": 11,
+      "fallbacks": 6
+    },
+    "Formula": {
+      "attempts": 19,
+      "success": 7
+    }
+  },
+  "quickRecommendations": {
+    "Defeated": 49,
+    "Fled": 33,
+    "Surrendered": 4,
+    "Negotiated": 8,
+    "Escaped": 6
+  },
+  "recommendationsAccepted": 74,
+  "groups": {
+    "individual": 50,
+    "mob": 50,
+    "totalOpponents": 392
+  },
+  "rosterSaved": 100,
+  "rosterAutoUpdated": 100,
+  "rosterReused": 47,
+  "unsavedWarnings": 27,
+  "journalTotal": 1448,
+  "attackTranscripts": 894,
+  "transcriptsHiddenChecks": 100,
+  "openThreads": 41,
+  "resolvedThreads": 59,
+  "pressureBreaks": 58,
+  "clockAdvances": 186,
+  "salvage": 201,
+  "campActions": 100,
+  "bulkWarnings": 15,
+  "days": 16,
+  "hpSyncFailures": 0,
+  "matrixTemplateChecks": 100,
+  "hitRate": 38.9,
+  "averageAmmo": 3.75,
+  "averageDamage": 15.25,
+  "averageOpponents": 3.92,
+  "distributions": {
+    "genotype": {
+      "Humanoid": 22,
+      "Pure Strain Human": 23,
+      "Mutant Animal": 33,
+      "Mutant Plant": 22
+    },
+    "danger": {
+      "Guarded": 31,
+      "Low": 23,
+      "Severe": 22,
+      "Extreme": 24
+    },
+    "mentalMode": {
+      "Lightweight": 34,
+      "Matrix": 33,
+      "Formula": 33
+    }
+  },
+  "narrativeJournalEntries": 554,
+  "averageJournalEntries": 14.48
+}

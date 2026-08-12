@@ -1,0 +1,89 @@
+{
+  "sessions": 100,
+  "completed": 100,
+  "deadEnds": 0,
+  "expeditionTurns": 600,
+  "pressureBreaks": 61,
+  "clockAdvances": 197,
+  "physicalAttacks": 813,
+  "hits": 252,
+  "damage": 1119,
+  "forecastChecks": 533,
+  "forecastErrors": 0,
+  "ammoSpent": 351,
+  "ammoWarnings": 1,
+  "ammoBlocks": 0,
+  "presetsSaved": 100,
+  "presetsLoaded": 100,
+  "presetFailures": 0,
+  "repeatAttacks": 45,
+  "undoAttempts": 128,
+  "undoSuccess": 128,
+  "undoFailures": 0,
+  "transcriptsRemoved": 128,
+  "recentCombatUpdates": 533,
+  "moralePrompts": {
+    "firstBlood": 89,
+    "halfHp": 17,
+    "leaderDefeat": 8,
+    "overwhelmingForce": 82
+  },
+  "moraleChecks": 99,
+  "moraleFailures": 51,
+  "tones": {
+    "Gritty": 34,
+    "Standard": 33,
+    "Cinematic": 33
+  },
+  "recommendations": {
+    "Defeated": 26,
+    "Fled": 68,
+    "Surrendered": 1,
+    "Negotiated": 3,
+    "Escaped": 2
+  },
+  "acceptedRecommendations": 65,
+  "individualGroups": 52,
+  "mobs": 48,
+  "opponents": 475,
+  "summaryOnly": 50,
+  "everyAttack": 50,
+  "combatSummaries": 100,
+  "childTranscripts": 247,
+  "reconciliations": 100,
+  "conditionsAdded": 31,
+  "rostersUpdated": 100,
+  "rostersReused": 56,
+  "mentalAttacks": 61,
+  "salvage": 204,
+  "bulkWarnings": 8,
+  "campActions": 100,
+  "daysAdvanced": 12,
+  "journalNarrative": 539,
+  "openThreads": 41,
+  "resolvedThreads": 59,
+  "hpSyncFailures": 0,
+  "hitRate": 31,
+  "averageOpponents": 4.75,
+  "averageAmmo": 3.51,
+  "averageDamage": 11.19,
+  "distributions": {
+    "genotype": {
+      "Mutant Animal": 18,
+      "Humanoid": 25,
+      "Mutant Plant": 26,
+      "Pure Strain Human": 31
+    },
+    "danger": {
+      "Extreme": 24,
+      "Low": 29,
+      "Guarded": 21,
+      "Severe": 26
+    },
+    "tone": {
+      "Gritty": 34,
+      "Standard": 33,
+      "Cinematic": 33
+    }
+  }
+}

@@ -1,0 +1,163 @@
+import { RNG } from './rng.js';
+import { defaults } from '../data/defaultTables.js';
+const uid = () => crypto.randomUUID();
+export const table = (t, k) => t[k]?.length ? t[k] : defaults[k];
+const P = (r, t, k) => r.pick(table(t, k));
+const mutationDetails = {
+    'Prism Carapace': { activation: 'Passive', range: 'Body', duration: 'Constant', targets: 'Self', uses: 'Constant', damage: 'None', effect: 'Faceted plates scatter harsh light and soften one chosen energy impact per scene.' },
+    'Mycelial Breath': { range: 'Short', duration: '1d4 rounds', targets: 'Small cloud', uses: 'Twice per day', damage: 'Irritating spores', effect: 'Exhales luminous spores that obscure sight and mark moving creatures with a faint glow.' },
+    'Lodestone Palms': { range: 'Touch', duration: 'Concentration', targets: 'One metal object', uses: 'Three times per scene', damage: 'None', effect: 'Hands cling to metal and can tug unattended ferrous objects across a short distance.' },
+    'Solar-Frond Skin': { activation: 'Passive', range: 'Body', duration: 'Constant', targets: 'Self', uses: 'Constant', damage: 'None', effect: 'Sunlight replaces part of the character’s food needs; long darkness causes fatigue.' },
+    'Flicker Regrowth': { range: 'Body', duration: 'Instant', targets: 'Self', uses: 'Once per day', damage: 'None', effect: 'Rapidly closes a minor wound, leaving bright temporary scar tissue.' },
+    'Geode Skeleton': { activation: 'Passive', range: 'Body', duration: 'Constant', targets: 'Self', uses: 'Constant', damage: 'None', effect: 'Crystal-laced bones resist crushing impacts but resonate loudly near heavy machinery.' },
+    'Lumen Gaze': { range: 'Medium', duration: 'Concentration', targets: 'One zone', uses: 'At will', damage: 'None', effect: 'Eyes cast cold light that reveals recent radiation traces and hidden reflective markings.' },
+    'Ribbon Limbs': { activation: 'Passive', range: 'Body', duration: 'Constant', targets: 'Self', uses: 'Constant', damage: 'None', effect: 'Flexible limbs squeeze through narrow gaps and reach nearby objects, but fitted armor requires alteration.' },
+    'Static Wake': { range: 'Short', duration: '1 round', targets: 'Nearby minds', uses: 'Once per scene', damage: 'Mental static', effect: 'A burst of thought-noise disrupts concentration and briefly jams simple communications.' },
+    'Hollow-Echo Sense': { range: 'Medium', duration: 'Concentration', targets: 'Area', uses: 'At will', damage: 'None', effect: 'Reads the shape of nearby spaces from returning vibration, even in darkness.' },
+    'Neural Overclock': { range: 'Mind', duration: '1 scene', targets: 'Self', uses: 'Once per day', damage: 'None', effect: 'Accelerates perception for a decisive response; afterward the character gains an exhausted use box.' },
+    'Phase Stutter': { range: 'Body', duration: 'Instant', targets: 'Self', uses: 'Twice per scene', damage: 'None', effect: 'Skips a fraction of a second sideways, slipping a few meters or through a closing barrier.' },
+    'Dream Broadcast': { range: 'Long', duration: 'One sleep cycle', targets: 'Nearby sleepers', uses: 'Once per night', damage: 'None', effect: 'Plants a symbolic message in sleeping minds; the sender cannot control how recipients interpret it.' },
+    'Machine Sympathy': { range: 'Touch', duration: 'Concentration', targets: 'One machine', uses: 'At will', damage: 'None', effect: 'Feels a machine’s broad condition and strongest current need as an emotion.' },
+    'Borrowed Instinct': { range: 'Short', duration: '1 scene', targets: 'One creature', uses: 'Once per scene', damage: 'None', effect: 'Copies one mundane sensory or movement adaptation observed in a nearby living creature.' },
+    'Gravity Hunch': { activation: 'Passive', range: 'Medium', duration: 'Constant', targets: 'Area', uses: 'Constant', damage: 'None', effect: 'Senses unstable floors, sudden drops, and abnormal gravity as pressure behind the eyes.' },
+    'Brittle Molt': { activation: 'Passive', range: 'Body', duration: 'Constant', targets: 'Self', uses: 'Constant', damage: 'Extra impact', effect: 'The outer layer cracks under heavy blows and must be repaired during rest.' },
+    'Sun Hunger': { activation: 'Passive', range: 'Body', duration: 'Constant', targets: 'Self', uses: 'Constant', damage: 'Fatigue', effect: 'Without strong light each day, movement and recovery become progressively sluggish.' },
+    'Signal Bleed': { activation: 'Passive', range: 'Short', duration: 'Constant', targets: 'Nearby receivers', uses: 'Constant', damage: 'None', effect: 'Strong emotions leak as radio noise, making stealth near active electronics difficult.' },
+    'Memory Shedding': { activation: 'Passive', range: 'Mind', duration: 'Variable', targets: 'Self', uses: 'After stress', damage: 'None', effect: 'After severe stress, one recent detail becomes inaccessible until another character prompts it.' },
+    'Waterlock Tissue': { activation: 'Passive', range: 'Body', duration: 'Constant', targets: 'Self', uses: 'Constant', damage: 'Fatigue', effect: 'Dry conditions stiffen joints unless the character regularly soaks or drinks extra water.' },
+    'Predator Beacon': { activation: 'Passive', range: 'Long', duration: 'Constant', targets: 'Mutant beasts', uses: 'Constant', damage: 'None', effect: 'A scent or psychic trace draws curious predators during prolonged travel.' }
+};
+const makeMutation = (r, name, category, quality) => {
+    const base = { id: uid(), name, category, quality, activation: quality === 'Defect' ? 'Passive' : r.pick(['Conscious', 'Passive']), range: category === 'Mental' ? 'Short' : 'Body', duration: quality === 'Defect' ? 'Constant' : r.pick(['Instant', '1 scene', 'Constant']), targets: category === 'Mental' ? 'One mind' : 'Self', uses: quality === 'Defect' ? 'Constant' : r.pick(['At will', 'Once per scene', 'Twice per day']), damage: 'None', effect: quality === 'Defect' ? 'Define how this custom defect complicates play.' : 'Define this custom mutation’s effect.', exhausted: false, misfire: false, notes: '' };
+    return { ...base, ...mutationDetails[name] };
+};
+export function characterStats(seed, genotype, method) {
+    const r = new RNG(seed + '-attributes');
+    const names = ['Strength', 'Constitution', 'Dexterity', 'Intelligence', 'Willpower', 'Charisma'];
+    const roll = () => {
+        if (method === 'Manual entry')
+            return 10;
+        if (method === 'd20-style roll')
+            return r.int(1, 20);
+        const dice = Array.from({ length: method === '4d6 drop lowest' ? 4 : 3 }, () => r.int(1, 6));
+        if (dice.length === 4)
+            dice.splice(dice.indexOf(Math.min(...dice)), 1);
+        return dice.reduce((sum, value) => sum + value, 0);
+    };
+    const modifiers = { 'Pure Strain Human': { Constitution: 1, Intelligence: 2, Charisma: 1 }, Humanoid: {}, 'Mutant Animal': { Strength: 2, Dexterity: 1, Charisma: -2 }, 'Mutant Plant': { Strength: 1, Constitution: 3, Dexterity: -2 } };
+    const profile = modifiers[genotype] || {};
+    const attributes = names.map(name => ({ name, value: Math.max(3, Math.min(21, roll() + (profile[name] || 0))) }));
+    const constitution = attributes.find(attribute => attribute.name === 'Constitution')?.value || 10;
+    const hitPoints = genotype === 'Pure Strain Human' ? constitution * 4 + r.int(1, 8) : genotype === 'Mutant Plant' ? constitution * 4 + r.int(1, 6) : genotype === 'Mutant Animal' ? constitution * 3 + r.int(1, 8) : constitution * 3 + r.int(1, 6);
+    return { attributes, hitPoints };
+}
+export function mutationPackage(seed, genotype, t, intensity = 'Standard', defects = 'Occasional') {
+    if (genotype === 'Pure Strain Human')
+        return [];
+    const r = new RNG(seed + '-mutations-' + intensity + '-' + defects);
+    const adjust = (count) => intensity === 'Low' ? Math.max(1, count - 1) : intensity === 'High' ? count + 1 : count;
+    const physicalCount = adjust(genotype === 'Mutant Plant' ? r.int(2, 4) : genotype === 'Mutant Animal' ? r.int(2, 4) : r.int(1, 3));
+    const mentalCount = adjust(genotype === 'Mutant Plant' ? r.int(1, 2) : r.int(1, 3));
+    const defectCount = defects === 'None' ? 0 : defects === 'Harsh' ? r.int(1, 2) : r.int(0, genotype === 'Humanoid' ? 1 : 2);
+    const draw = (key, count, category, quality) => { const pool = [...table(t, key)], out = []; for (let i = 0; i < count && pool.length; i++) {
+        const index = r.int(0, pool.length - 1);
+        out.push(makeMutation(r, pool.splice(index, 1)[0], category, quality));
+    } return out; };
+    return [...draw('physicalMutations', physicalCount, 'Physical', 'Beneficial'), ...draw('mentalMutations', mentalCount, 'Mental', 'Beneficial'), ...draw('mutationDefects', defectCount, r.pick(['Physical', 'Mental']), 'Defect')];
+}
+const equipmentDetails = {
+    'Scrap Spear': { damage: '1d8', range: 'Reach', hands: '2', bulk: 2, techLevel: 'I' }, 'Coil Sling': { damage: '1d6', range: 'Medium', hands: '1', ammoType: 'Sling Coils', ammoCurrent: 12, ammoMax: 12, bulk: 1, techLevel: 'II' }, 'Ceramic Hatchet': { damage: '1d6', range: 'Close', hands: '1', bulk: 1, techLevel: 'II' }, 'Salvage Bow': { damage: '1d8', range: 'Long', hands: '2', ammoType: 'Salvage Arrows', ammoCurrent: 10, ammoMax: 10, bulk: 2, techLevel: 'II' }, 'Shock Baton': { damage: '1d6 shock', range: 'Close', hands: '1', chargesCurrent: 6, chargesMax: 6, bulk: 1, techLevel: 'III' }, 'Pulse Carbine': { damage: '2d6 pulse', range: 'Long', hands: '2', ammoType: 'Carbine Cells', ammoCurrent: 8, ammoMax: 8, bulk: 2, techLevel: 'IV' }, 'Wire Garrote': { damage: '1d4', range: 'Close', hands: '2', bulk: 0.5, techLevel: 'II' }, 'Rivet Pistol': { damage: '1d8', range: 'Medium', hands: '1', ammoType: 'Rivet Magazine', ammoCurrent: 6, ammoMax: 6, bulk: 1, techLevel: 'III' },
+    'Patchplate Vest': { defense: 2, protection: 'Torso', bulk: 2, techLevel: 'II' }, 'Shellweave Coat': { defense: 1, protection: 'Body', bulk: 1, techLevel: 'III' }, 'Ceramic Lamellar': { defense: 3, protection: 'Body', movementPenalty: 1, bulk: 3, techLevel: 'II' }, 'Rubberized Rad Cloak': { defense: 1, protection: 'Radiation and weather', movementPenalty: 1, bulk: 2, techLevel: 'III' }, 'Riot Carapace': { defense: 4, protection: 'Body', movementPenalty: 2, bulk: 4, techLevel: 'III' }, 'Mirror-Mesh Mantle': { defense: 2, protection: 'Light and heat', bulk: 2, techLevel: 'IV' },
+    'Water Flask': { category: 'Consumable', quantity: 2, chargesCurrent: 4, chargesMax: 4, bulk: 1, techLevel: 'I' }, 'Field Rations': { category: 'Consumable', quantity: 4, chargesCurrent: 1, chargesMax: 1, bulk: 0.25, techLevel: 'I' }, 'Hand Lamp': { chargesCurrent: 6, chargesMax: 6, bulk: 0.5, techLevel: 'III' }, 'Filter Mask': { chargesCurrent: 3, chargesMax: 3, bulk: 0.5, techLevel: 'II' }, 'Salvage Toolkit': { bulk: 2, techLevel: 'III' }, 'Climbing Line': { bulk: 1, techLevel: 'I' }
+};
+export const equipmentTagsFor = (name, category) => {
+    const lower = name.toLowerCase(), tags = [];
+    const has = (pattern) => pattern.test(lower);
+    if (category === 'Weapon') {
+        tags.push(has(/bow|blade|spear|dart|garrote|sling/) ? 'quiet' : 'loud');
+        if (has(/coil|ion|pulse|arc|shock|laser|plasma|caster/))
+            tags.push('powered');
+        if (has(/glass|ceramic|crystal/))
+            tags.push('fragile');
+        if (has(/hammer|carbine|lance|cleaver/))
+            tags.push('bulky');
+    }
+    if (category === 'Armor') {
+        tags.push(has(/coat|mantle|mesh|vest|cloak/) ? 'survival' : 'bulky');
+        if (has(/glass|ceramic|mirror|crystal/))
+            tags.push('fragile');
+        if (has(/chrome|reactive|field|exo|powered/))
+            tags.push('powered');
+        if (has(/rad|lead|isotope/))
+            tags.push('radioactive');
+    }
+    if (category === 'Gear' || category === 'Consumable') {
+        if (has(/beacon|lamp|scanner|signal|glow/))
+            tags.push('powered');
+        if (has(/compass|filter|flask|line|shelter|tarp|toolkit|ration|water|rope|tent|blanket|fire/))
+            tags.push('survival');
+        if (has(/scanner|lamp|beacon|compass|glass|lens/))
+            tags.push('fragile');
+        if (has(/shelter|toolkit|tarp|pack/))
+            tags.push('bulky');
+    }
+    if (category === 'Ammunition') {
+        tags.push(has(/arrow|dart|pellet/) ? 'quiet' : 'loud');
+        if (has(/cell|charge|arc|coil|cryo|ion|pulse/))
+            tags.push('powered');
+        if (has(/ceramic|flechette|glass/))
+            tags.push('fragile');
+        if (has(/belt|canister|pack/))
+            tags.push('bulky');
+        if (has(/rad|isotope/))
+            tags.push('radioactive');
+        tags.push('trade-good');
+    }
+    if (category === 'Artifact')
+        tags.push('powered', 'fragile');
+    if (category === 'Salvage')
+        tags.push('trade-good');
+    if (has(/med|drug|antitoxin|bandage|surgery|chemical|field filter|rad filter|field flask|rad flask/))
+        tags.push('medical');
+    if (has(/rad|isotope|reactor|uranium/))
+        tags.push('radioactive');
+    if (has(/ration|water|filter|rope|tent|blanket|compass|fire|shelter|flask|line|tarp/))
+        tags.push('survival');
+    if (has(/ancient|intact|encrypted|military|sealed|chrome|mirror/))
+        tags.push('trade-good');
+    return [...new Set(tags)];
+};
+export const equipmentTemplate = (name, category) => {
+    const r = new RNG('equipment-template-' + category + '-' + name);
+    const base = { id: uid(), name, category, quantity: 1, equipped: category === 'Weapon' || category === 'Armor', condition: 'Serviceable', bulk: 1, techLevel: r.pick(['I', 'II', 'III', 'IV']), damage: '', range: '', hands: '', ammoType: '', ammoCurrent: 0, ammoMax: 0, defense: 0, protection: '', movementPenalty: 0, chargesCurrent: 0, chargesMax: 0, tags: equipmentTagsFor(name, category), notes: '' };
+    const generated = category === 'Weapon' ? (() => { const range = r.pick(['Close', 'Reach', 'Medium', 'Long']), capacity = range === 'Close' || range === 'Reach' ? 0 : r.int(4, 12); return { damage: r.pick(['1d4', '1d6', '1d8', '2d4', '2d6']), range, hands: r.pick(['1', '1', '2']), ammoType: capacity ? r.pick(defaults.ammunition) : '', ammoCurrent: capacity, ammoMax: capacity, bulk: r.int(1, 3) }; })() : category === 'Armor' ? { defense: r.int(1, 4), protection: r.pick(['Body', 'Torso', 'Impact', 'Heat and light', 'Radiation and weather']), movementPenalty: r.int(0, 2), bulk: r.int(1, 4) } : category === 'Ammunition' ? { quantity: r.int(6, 20), bulk: r.pick([0.1, 0.25, 0.5]), techLevel: r.pick(['II', 'III', 'IV']) } : { quantity: 1, bulk: r.pick([0.25, 0.5, 1, 2]), chargesCurrent: r.int(0, 6), chargesMax: r.int(0, 6) };
+    if (generated.chargesMax && generated.chargesCurrent > generated.chargesMax)
+        generated.chargesCurrent = generated.chargesMax;
+    return { ...base, ...generated, ...equipmentDetails[name] };
+};
+export function startingEquipment(seed, genotype, origin, t, catalog = []) {
+    const make = (name, category) => { const base = equipmentTemplate(name, category), override = catalog.find(item => item.name === name && item.category === category); return override ? { ...base, ...override, id: uid(), equipped: category === 'Weapon' || category === 'Armor' } : base; };
+    const r = new RNG(seed + '-equipment-' + genotype + '-' + origin), items = [];
+    const weapon = make(P(r, t, 'weapons'), 'Weapon');
+    items.push(weapon);
+    if (genotype !== 'Mutant Plant' || r.int(1, 2) === 2)
+        items.push(make(P(r, t, 'armor'), 'Armor'));
+    const gearPool = [...table(t, 'generalGear')];
+    for (let i = 0; i < 3 && gearPool.length; i++) {
+        const index = r.int(0, gearPool.length - 1);
+        items.push(make(gearPool.splice(index, 1)[0], 'Gear'));
+    }
+    if (weapon.ammoType)
+        items.push(make(weapon.ammoType, 'Ammunition'));
+    items.push(make(P(r, t, 'salvage'), 'Salvage'));
+    return items;
+}
+export function character(seed, t, catalog = []) {
+    const r = new RNG(seed), genotype = P(r, t, 'genotypes'), origin = r.pick(['Vault-born', 'Caravan-raised', 'Ruins scavenger', 'Settlement guardian', 'Wilderness foundling', 'Machine-cult exile']), attributeMethod = '4d6 drop lowest', mutationIntensity = 'Standard', defectFrequency = 'Occasional';
+    const lineage = genotype === 'Mutant Animal' ? r.pick(['Canid stock', 'Feline stock', 'Avian stock', 'Reptile stock', 'Burrowing mammal stock']) : genotype === 'Mutant Plant' ? r.pick(['Flowering vine', 'Fungal colony', 'Desert succulent', 'Ancient tree stock', 'Carnivorous bog plant']) : '';
+    const stats = characterStats(seed, genotype, attributeMethod), inventory = startingEquipment(seed, genotype, origin, t, catalog), defense = 10 + inventory.filter(item => item.equipped && item.category === 'Armor').reduce((sum, item) => sum + item.defense, 0), movement = Math.max(1, 12 - inventory.filter(item => item.equipped).reduce((sum, item) => sum + item.movementPenalty, 0));
+    return { id: uid(), seed, name: P(r, t, 'names'), player: '', origin, genotype, lineage, attributeMethod, mutationIntensity, defectFrequency, level: '1', statusPoints: '0', homeland: P(r, t, 'homelands'), affiliation: '', languages: 'Trade cant', description: r.pick(['Lean, dust-wrapped, and watchful', 'Broad-shouldered with luminous scars', 'Small, quick, and covered in patchwork tech']), personality: r.pick(['Dryly optimistic', 'Suspicious but loyal', 'Endlessly curious']), goal: r.pick(['Find a safe home', 'Decode an inherited map', 'Free a captive community']), fear: r.pick(['Deep water', 'Mindless machines', 'Losing control']), trait: P(r, t, 'traits'), oldObject: r.pick(['Cracked compass', 'Plastic identity card', 'Silent wristwatch']), notes: '', attributes: stats.attributes, derived: { 'Hit Points': String(stats.hitPoints), 'Current Hit Points': String(stats.hitPoints), 'Armor / Defense': String(defense), 'Movement': String(movement), 'Initiative': '0', 'Attack notes': '', 'Saving throw notes': '', 'Mental resistance notes': '', 'Radiation / poison notes': '' }, mutations: mutationPackage(seed, genotype, t, mutationIntensity, defectFrequency), inventory, conditions: [], exposure: { Radiation: 0, Poison: 0, Hunger: 0, Thirst: 0, Fatigue: 0 }, createdAt: new Date().toISOString() };
+}
+export function ruin(seed, t, size = 'Medium') { const r = new RNG(seed), n = { Small: 6, Medium: 12, Large: 20, Vast: 30 }[size] || 12, type = P(r, t, 'ruinTypes'), name = r.pick(['The Silent Meridian', 'Vault of Crooked Suns', 'Helix Station', 'The Amber Below', 'Skyfall Annex']), areas = Array.from({ length: n }, (_, i) => ({ id: i + 1, name: (i === 0 ? 'Threshold' : i === n - 1 ? 'Core Vault' : P(r, t, 'roomTypes')) + ' ' + (i + 1), type: i === 0 ? 'Entrance' : i === n - 1 ? 'Final vault' : P(r, t, 'roomTypes'), impression: r.pick(['A low hum vibrates in your teeth.', 'Dust hangs perfectly still.', 'Faded lights chase along the walls.']), description: r.pick(['Buckled panels conceal hand-painted warnings.', 'Old machinery shares the room with recent bedrolls.', 'Mineral growths lace through fractured consoles.']), exits: i < n - 1 ? [i + 2, ...(r.next() > .72 && i + 2 < n ? [i + 3] : [])] : [], encounter: P(r, t, 'encounters'), hazard: P(r, t, 'hazards'), salvage: P(r, t, 'salvage'), clue: r.pick(['A repeated seven-mark symbol', 'Fresh boot prints over old dust', 'A map with one room scratched away']), weird: r.pick(['Shadows point toward the core', 'Words echo before they are said', 'Metal surfaces feel warm']), feature: r.pick(['A manual override wheel', 'A dormant service drone', 'A sealed specimen drawer']), trigger: r.pick(['Removing salvage raises the alert', 'Bright light wakes the sensors', 'The next door destabilizes the floor']) })); const danger = r.pick(['Low', 'Guarded', 'Severe', 'Extreme']), condition = r.pick(['Canted but stable', 'Flooded lower levels', 'Power cycling unpredictably']), inhabitants = P(r, t, 'encounters'), dangerPressure = { Low: 0, Guarded: 1, Severe: 2, Extreme: 3 }[danger], structuralPressure = condition === 'Flooded lower levels' ? 2 : condition === 'Canted but stable' ? 1 : 0, radiationPressure = /reactor|toxic|medical|cloning|gene|orbital/i.test(type) ? 2 : 0, occupationPressure = /patrol|scavenger|robot|stalker|hound/i.test(inhabitants) ? 1 : 0, clock = (value) => Math.max(0, Math.min(5, value)); return { id: uid(), seed, name, type, size, danger, premise: 'A ' + type.toLowerCase() + ' broadcasts a signal that should have died centuries ago.', purpose: r.pick(['Climate research', 'Civil defense', 'Mass transit control', 'Genetic agriculture']), wentWrong: r.pick(['Its caretaker misread its final order', 'A containment seal failed', 'Survivors triggered the defense grid']), condition, inhabitants, primaryDanger: P(r, t, 'hazards'), secondaryDanger: P(r, t, 'hazards'), weirdness: r.pick(['Gravity leans toward the central shaft', 'Plants repeat nearby conversations', 'Every clock shows a different future hour']), entries: ['Collapsed service ramp', 'Ventilation chimney', 'Half-open blast door'], clocks: { 'Alert Level': clock(Math.floor(dangerPressure / 2) + occupationPressure + r.int(0, 1)), 'Structural Collapse': clock(structuralPressure + r.int(0, 1)), 'Radiation Exposure': clock(radiationPressure + (danger === 'Extreme' ? 1 : 0) + r.int(0, 1)), 'Faction Interference': clock((dangerPressure >= 2 ? 1 : 0) + r.int(0, 2)) }, salvageValue: r.pick(['Sparse', 'Useful', 'Rich', 'Exceptional']), discovery: r.pick(['A map to an intact dome', 'A sleeping civic intelligence', 'Proof the disaster was deliberate']), guardian: P(r, t, 'encounters'), exitComplication: r.pick(['A rival blocks the return route', 'The ruin begins sealing itself', 'Weather outside turns lethal']), areas, createdAt: new Date().toISOString() }; }
+const common = (r, t, kind) => kind === 'Encounter' ? { Type: r.pick(['Mutant creature', 'Human scavengers', 'Robot', 'Faction patrol', 'Weird phenomenon']), Description: P(r, t, 'encounters') + ' watches from broken cover.', Motivation: r.pick(['Protect territory', 'Find power', 'Recover a companion']), Tactics: r.pick(['Tests defenses then retreats', 'Uses the terrain', 'Negotiates first']), Wants: r.pick(['Food', 'Information', 'Safe passage']), Fears: r.pick(['Fire', 'Loud machinery', 'Isolation']), Clue: 'Knows a hidden route', Loot: P(r, t, 'salvage'), Escalation: 'Returns with reinforcements', Difficulty: r.pick(['Routine', 'Risky', 'Dangerous', 'Deadly']) } : kind === 'Hazard' ? { Hazard: P(r, t, 'hazards'), Warning: r.pick(['Ozone smell', 'Dead insects', 'Flickering blue dust']), Effect: r.pick(['Advances a clock', 'Separates explorers', 'Damages exposed gear']), Bypass: r.pick(['Ground the circuit', 'Move slowly', 'Use a sealed route']) } : kind === 'Artifact' ? { Form: P(r, t, 'artifacts'), Function: r.pick(['Projects a hard-light shelter', 'Purifies contaminated fluids', 'Translates machine signals', 'Disrupts gravity']), FalseFunction: 'Appears ceremonial', Activation: r.pick(['Voice phrase', 'Twist two rings', 'Apply body heat']), Power: 'Micro-cell', Charges: String(r.int(1, 8)), SideEffect: r.pick(['Hair glows', 'Radios whisper', 'Brief memory loss']), Malfunction: r.pick(['Reverses effect', 'Locks on', 'Attracts robots']), Condition: r.pick(['Pristine', 'Worn', 'Cracked']), Value: r.pick(['Useful', 'Valuable', 'Priceless']), Clue: 'Matching symbols near the power port' } : kind === 'Settlement' ? { Type: P(r, t, 'homelands'), Population: r.pick(['Dozens', 'Hundreds', 'A few thousand']), Government: r.pick(['Council of trades', 'Elected speaker', 'Machine lottery']), Resource: r.pick(['Clean water', 'Ceramic plates', 'Medicinal algae']), Problem: P(r, t, 'settlementProblems'), Taboo: r.pick(['Never whistle at night', 'Do not touch blue metal', 'Robots eat first']), Defense: r.pick(['Junk wall', 'Buried shock grid', 'Watch kites']), NPC: P(r, t, 'names'), Secret: r.pick(['The well is artificial', 'The leader is a projection', 'A bunker lies below']), Trade: P(r, t, 'salvage'), Mutants: r.pick(['Welcomed', 'Watched', 'Respected']), Robots: r.pick(['Feared', 'Employed', 'Worshipped']), Technology: r.pick(['Practical', 'Ritualized', 'Forbidden']) } : { Symbol: r.pick(['Broken halo', 'Three green hands', 'Silver moth']), Belief: r.pick(['Knowledge must circulate', 'Safety requires control', 'Mutation is adaptation']), Leader: P(r, t, 'names'), Goal: r.pick(['Control the water road', 'Wake an ancient machine', 'Unite settlements']), Operation: P(r, t, 'factionMoves'), Controls: r.pick(['A bridge', 'A radio tower', 'A salvage field']), Needs: r.pick(['Fuel', 'Experts', 'Legitimacy']), Hates: r.pick(['Waste', 'Unlicensed robots', 'The old city']), Outsiders: r.pick(['Courteous', 'Suspicious', 'Exploitative']), Mutants: r.pick(['Recruit aggressively', 'Treat as equals', 'Keep distant']), Gear: r.pick(['Yellow visors', 'Shock staves', 'Patchwork capes']), Complication: P(r, t, 'complications') };
+export function generate(seed, kind, t) { const r = new RNG(seed), fields = common(r, t, kind); const title = kind === 'Faction' ? r.pick(['The Verdigris Pact', 'Keepers of Noon', 'The Last Circuit']) : kind === 'Settlement' ? r.pick(['Copperwell', 'Morrow Gate', 'Seven-Lamp Crossing']) : kind === 'Artifact' ? (fields.Form || 'Unknown artifact') : kind === 'Hazard' ? (fields.Hazard || 'Unknown hazard') : kind === 'Encounter' ? ((fields.Type || 'Encounter') + ': ' + (fields.Description || 'Unknown contact').replace(' watches from broken cover.', '')) : kind + ' result'; return { id: uid(), kind, title, fields, createdAt: new Date().toISOString() }; }
