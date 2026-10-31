@@ -2,6 +2,8 @@
 
 A local-first, offline-capable solo science-fantasy campaign console. All included names, generators, creatures, artifacts, and tables are original placeholders; no published rules text or protected game data is included.
 
+Example: 
+
 ## Run locally
 
 1. Open a terminal in this folder.
