@@ -2,7 +2,7 @@
 
 A local-first, offline-capable solo science-fantasy campaign console. All included names, generators, creatures, artifacts, and tables are original placeholders; no published rules text or protected game data is included.
 
-Example: 
+Example: https://charris256.github.io/Gamma-World-2E-Solo/
 
 ## Run locally
 
